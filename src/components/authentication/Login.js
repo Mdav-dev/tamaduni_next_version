@@ -4,7 +4,7 @@ import React from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import LeftImage from "./LeftImage";
 import { useForm } from "react-hook-form";
-import useAuth from "@/components/authentication/useAuth";
+import useAuth from "@/Components/authentication/useAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
