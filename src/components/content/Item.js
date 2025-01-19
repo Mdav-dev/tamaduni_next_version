@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { Allerta_Stencil, Anek_Devanagari, Arya } from "next/font/google";
 import Link from "next/link";
-import useAuth from "@/components/authentication/useAuth";
+import useAuth from "@/Components/authentication/useAuth";
 import { useRouter } from "next/navigation";
 
 const allertaStencil = Allerta_Stencil({
