@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import data from "./data.json";
+import Image from "next/image";
 
 const List = () => {
   // State to track the selected person
@@ -72,7 +73,7 @@ const List = () => {
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
         >
           {selectedPerson.image?.map((img, index) => (
-            <img
+            <Image
               key={index}
               src={img}
               alt={selectedPerson.name}

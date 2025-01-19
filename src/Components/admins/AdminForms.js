@@ -17,10 +17,10 @@ const AdminsForms = () => {
   const user_url = "user/"; 
 
   const getDynamicUrl = () => {
-    if (!selectedModule || !selectedCategory || !selectedSubcategory) {
+    if (!selectedModule || !selectedSubcategory) {
       return null;
     }
-    return `${base_url}${user_url}${selectedModule}/${selectedCategory}/${selectedSubcategory}`;
+    return `${base_url}${user_url}${selectedModule}/${selectedSubcategory}`;
   };
 
   const handleModuleChange = (e) => {
