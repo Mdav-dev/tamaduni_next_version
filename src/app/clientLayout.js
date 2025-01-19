@@ -2,8 +2,8 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import Topbar from "@/components/navigation/topbar";
-import Footer from "@/components/footer/Footer";
+import Topbar from "@/Components/navigation/topbar";
+import Footer from "@/Components/footer/Footer";
 
 const ClientLayout = ({ children }) => {
   const pathname = usePathname();

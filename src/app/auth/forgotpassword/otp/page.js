@@ -1,4 +1,4 @@
-import OTPPage from "@/components/authentication/OTP";
+import OTPPage from "@/Components/authentication/OTP";
 import React from "react";
 
 const page = () => {
