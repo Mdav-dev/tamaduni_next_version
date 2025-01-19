@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import useAuth from "@/components/authentication/useAuth"; // Assuming this is your authentication hook
+import useAuth from "@/Components/authentication/useAuth"; // Assuming this is your authentication hook
 
 const Topbar = () => {
   const pathname = usePathname();

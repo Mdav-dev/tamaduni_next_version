@@ -1,4 +1,4 @@
-import ContentSlider from "@/components/views/culturalMapping/Content";
+import ContentSlider from "@/Components/views/culturalMapping/Content";
 import React from "react";
 
 function page() {

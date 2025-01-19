@@ -1,10 +1,10 @@
 "use client";
-import DETopbar from "@/components/views/digitalethnography/DETopbar";
+import DETopbar from "@/Components/views/digitalethnography/DETopbar";
 import dynamic from "next/dynamic";
 import React from "react";
 
 const DEContent = dynamic(
-  () => import("@/components/views/digitalethnography/Content"),
+  () => import("@/Components/views/digitalethnography/Content"),
   { ssr: false }
 );
 
