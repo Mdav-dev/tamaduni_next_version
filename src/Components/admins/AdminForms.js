@@ -3,6 +3,7 @@ import DynamicForm from "./DynamicForm";
 import { formsConfig } from "./formsConfig";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { base_url, user_url } from "@/hooks/urls";
 
 const AdminsForms = () => {
   const [selectedModule, setSelectedModule] = useState("");
@@ -13,8 +14,8 @@ const AdminsForms = () => {
   
   setTimeout(() => setShowMessage(true), 5000);
 
-  const base_url = "http://api.dev.tamaduni.africa:3100/";
-  const user_url = "user/"; 
+
+  
 
   const getDynamicUrl = () => {
     if (!selectedModule || !selectedSubcategory) {

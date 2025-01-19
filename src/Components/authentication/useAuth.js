@@ -1,8 +1,7 @@
-// /auth/useAuth.js
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import axios from "axios"; // Import axios for API requests
-import { base_url } from "@/hooks/urls";
+import axios from "axios";
+import { base_url, user_url } from "@/hooks/urls";
 import { useRouter } from "next/navigation";
 
 const useAuth = () => {
@@ -11,45 +10,52 @@ const useAuth = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  // Login function with actual API call
+  // Login function with API call and improved error handling
   const login = async (email, password) => {
     setLoading(true);
     setError(null);
-
+    
     try {
-      const response = await axios.post(`${base_url}user/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(`${base_url}${user_url}/login`, { email, password });
 
-      const { token } = response.data; // Extract token from the response
+      const { token } = response.data;
+      Cookies.set("authToken", token, { secure: true, sameSite: "Strict" });
 
-      // Store the token in a cookie
-      Cookies.set("authToken", token, { secure: true });
-
-      setUser({ email, token });
-
-      // router.push("/");
+      await verifyToken(token);  // Verify token after login
+      
+      router.push("/dashboard");  // Redirect to dashboard after successful login
     } catch (error) {
       console.error("Login failed:", error.response?.data || error.message);
-      setError(error.response?.data?.message || "Login failed");
+      setError(error.response?.data?.message || "Invalid login credentials");
     } finally {
       setLoading(false);
     }
   };
 
-  // Log out the user and clear the token
+  // Verify token and fetch user details
+  const verifyToken = async (token) => {
+    try {
+      const response = await axios.get(`${base_url}user/profile`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(response.data);
+    } catch (err) {
+      logout();
+    }
+  };
+
+  // Log out function
   const logout = () => {
     Cookies.remove("authToken");
     setUser(null);
+    router.push("/auth/login");  // Redirect to login after logout
   };
 
-  // Check if the user is logged in by verifying the token
+  // Check for existing token when component mounts
   useEffect(() => {
     const token = Cookies.get("authToken");
     if (token) {
-      // Optionally, decode token or fetch user info from the server
-      setUser({ email: "retrieved_email@example.com", token });
+      verifyToken(token);
     }
   }, []);
 

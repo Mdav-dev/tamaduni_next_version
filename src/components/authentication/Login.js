@@ -16,24 +16,22 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const { login, loading, error, user } = useAuth();
-
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    await login(data.email, data.password);
-    console.log("user", user);
-    console.log("error", error);
-    if (!error && user) {
-      router.push("/");
-    } else {
-      console.error("Login failed:", error);
+    try {
+      await login(data.email, data.password);
+      if (!error && user) {
+        toast.success("Login successful!");
+        router.push("/");
+      } else {
+        toast.error("Invalid credentials. Please try again.");
+      }
+    } catch (err) {
+      toast.error("An unexpected error occurred.");
     }
   };
 
-  const fillTestCredentials = () => {
-    setValue("email", "test@user.com"); // Set the test email
-    setValue("password", "Qwerty1234."); // Set the test password
-  };
   return (
     <div className="h-screen w-full flex">
       <LeftImage />
@@ -51,82 +49,25 @@ const Login = () => {
               placeholder="Email"
               {...register("email", {
                 required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                  message: "Invalid email address",
-                },
+                pattern: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
               })}
             />
-            {errors.email && (
-              <span className="text-red-500 text-sm">
-                {errors.email.message}
-              </span>
-            )}
+            {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+
             <label>Password</label>
             <input
               type="password"
+              autoComplete="new-password"
               placeholder="Password"
               className="rounded-md p-2 border border-gray-200"
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
+              {...register("password", { required: "Password is required", minLength: 6 })}
             />
-            {errors.password && (
-              <span className="text-red-500 text-sm">
-                {errors.password.message}
-              </span>
-            )}
-            <button
-              className={`${
-                loading
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-black text-white"
-              } text-white rounded-md p-2`}
-              type="submit"
-              disabled={loading}
-            >
+            {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+
+            <button className="bg-black text-white rounded-md p-2" type="submit" disabled={loading}>
               {loading ? "Logging in..." : "Log In"}
             </button>
-
-            <button
-              type="button"
-              onClick={fillTestCredentials}
-              className="w-full bg-gray-200 text-black rounded-md py-2 px-4 hover:bg-gray-300 transition"
-            >
-              Use Test Credentials
-            </button>
-
-            <p className="text-red-500 text-sm">{error}</p>
-            <Link className="underline" href="/auth/forgotpassword">
-              Forgot Password?
-            </Link>
           </form>
-        </section>
-        <section className="flex flex-col items-center space-y-4">
-          <h1 className="font-bold text-xl">Or Log in with</h1>
-          <section className="flex flex-col space-y-2">
-            <button className="flex items-center justify-center rounded-md py-2 px-4 hover:bg-gray-100 transition">
-              <FaGoogle className="text-red-500 mr-2" size={20} />{" "}
-              <span className="font-medium text-gray-700">Google</span>
-            </button>
-            <button className="flex items-center justify-center rounded-md py-2 px-4 hover:bg-gray-100 transition">
-              <FaFacebookF className="text-blue-600 mr-2" size={20} />{" "}
-              <span className="font-medium text-gray-700">Facebook</span>
-            </button>
-            <p className="text-gray-600">
-              Don&#39;t have an account?{" "}
-              <Link
-                href="/auth/signup"
-                className="text-blue-600 font-semibold hover:underline"
-              >
-                Sign up
-              </Link>
-            </p>
-          </section>
         </section>
       </section>
     </div>
