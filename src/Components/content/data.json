@@ -1,0 +1,37 @@
+ [
+    {
+      "title": "Afro Celebration",
+      "content": "Afro Celebration likely refers to a cultural event or festival celebrating African heritage, culture, music, dance, and traditions. It could take various forms, such as a community gathering, concert, dance performance, or festival organized to commemorate and showcase aspects of African culture. These celebrations often include a vibrant display of traditional African attire, music genres like Afrobeat, Afro-jazz, or traditional African rhythms, dance performances such as traditional dances or contemporary African dance styles, art exhibitions, cultural workshops, and cuisine showcasing African flavors.",
+      "image": "/items/Rectangle 5.png",
+      "buttonText": "Explore More",
+      "link": "/afrocelebration"
+    },
+    {
+      "title": "Cultural Mapping",
+      "content": "In Cultural Mapping we are going to study different cultures in relation to their location and their similaries which together unites them as one people Cultural mapping is a process used to identify, document, and represent the cultural resources and assets within a particular community or geographic area. It involves collecting data and information about various aspects of culture.",
+      "image": "/items/mapping.png",
+      "buttonText": "Explore More",
+      "link": "/culturalmapping"
+    },
+    {
+      "title": "Digital Ethnography",
+      "content": "In Cultural Mapping we are going to study different cultures in relation to their location and their similaries which together unites them as one people Cultural mapping is a process used to identify, document, and represent the cultural resources and assets within a particular community or geographic area. It involves collecting data and information about various aspects of culture.",
+      "image": "/items/digital.png",
+      "buttonText": "Explore More",
+      "link": "/digitalethnography"
+    },
+    {
+        "title": "Civilization",
+        "content": "In Cultural Mapping we are going to study different cultures in relation to their location and their similaries which together unites them as one people Cultural mapping is a process used to identify, document, and represent the cultural resources and assets within a particular community or geographic area. It involves collecting data and information about various aspects of culture.",
+        "image": "/items/civilization.png",
+        "buttonText": "Explore More"
+      },
+      {
+        "title": "Migration",
+        "content": "In Cultural Mapping we are going to study different cultures in relation to their location and their similaries which together unites them as one people Cultural mapping is a process used to identify, document, and represent the cultural resources and assets within a particular community or geographic area. It involves collecting data and information about various aspects of culture.",
+        "image": "/items/migration.png",
+        "buttonText": "Explore More",
+        "link": "/earlymobilityandmigration"
+      }
+  ]
+  
