@@ -13,7 +13,7 @@ const useAuth = () => {
   // Log out function with memoization
   const logout = useCallback(() => {
     Cookies.remove("authToken");
-    setUser(null);
+    setUser(null); 
     router.push("/auth/login");
   }, [router]);
 
@@ -44,7 +44,7 @@ const useAuth = () => {
       Cookies.set("authToken", token, { secure: true, sameSite: "Strict" });
 
       await verifyToken(token);
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       setError(error.response?.data?.message || "Invalid login credentials");
     } finally {
