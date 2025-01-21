@@ -7,6 +7,8 @@ const Gallery = () => {
     <div className="relative w-full h-full">
       <Image
         src="/afrocelebration/afro.jpeg"
+        // width={500}
+        // height={895}
         alt="Main Content"
         layout="fill"
         objectFit="cover" // or "contain" depending on your desired behavior

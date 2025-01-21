@@ -3,7 +3,7 @@ import DynamicForm from "./DynamicForm";
 import { formsConfig } from "./formsConfig";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { base_url, user_url } from "@/hooks/urls";
+import { base_url } from "@/hooks/urls";
 
 const AdminsForms = () => {
   const [selectedModule, setSelectedModule] = useState("");
@@ -21,7 +21,7 @@ const AdminsForms = () => {
     if (!selectedModule || !selectedSubcategory) {
       return null;
     }
-    return `${base_url}${user_url}${selectedModule}/${selectedSubcategory}`;
+    return `${base_url}${selectedModule}/${selectedSubcategory}`;
   };
 
   const handleModuleChange = (e) => {
@@ -57,6 +57,7 @@ const AdminsForms = () => {
         setResponseMessage("No token found. Please log in.");
         return;
       }
+     
 
       const dynamicUrl = getDynamicUrl();
 

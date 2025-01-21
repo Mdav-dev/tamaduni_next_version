@@ -3,33 +3,41 @@ import React, { useState } from "react";
 const DynamicForm = ({ formTitle, fields, onSubmit }) => {
   const [formData, setFormData] = useState(
     fields.reduce((acc, field) => {
-      acc[field.label] = field.defaultValue || ""; // Support default values
+      acc[String(field.key)] = field.defaultValue || "";
       return acc;
     }, {})
   );
-  const [isSubmitted, setIsSubmitted] = useState(false); // Track submission status
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-
-  const handleChange = (label, value) => {
-    setFormData((prev) => ({ ...prev, [label]: value }));
+  const handleChange = (key, value) => {
+    setFormData((prev) => ({ ...prev, [String(key)]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-
-    if (onSubmit) {
-      onSubmit(formData); // Pass form data to parent component (AdminsForms)
+    
+    // Convert keys to string format explicitly
+    const stringifiedFormData = {};
+    for (const key in formData) {
+      stringifiedFormData[String(key)] = formData[key];
     }
 
+    console.log("Form Data:", JSON.stringify(stringifiedFormData, null, 2));
+   
+
+    if (onSubmit) {
+      onSubmit(JSON.stringify(stringifiedFormData, null, 2));
+    }
+
+    // Reset the form
     setFormData(
       fields.reduce((acc, field) => {
-        acc[field.label] = "";
+        acc[String(field.key)] = "";
         return acc;
       }, {})
-    ); // Clear the form
+    );
 
-    setIsSubmitted(true); // Indicate the form was submitted
+    setIsSubmitted(true);
 
     // Hide the success message after 5 seconds
     setTimeout(() => setIsSubmitted(false), 5000);
@@ -50,8 +58,8 @@ const DynamicForm = ({ formTitle, fields, onSubmit }) => {
               <textarea
                 required={field.required}
                 className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={formData[field.label]}
-                onChange={(e) => handleChange(field.label, e.target.value)}
+                value={formData[String(field.key)]}
+                onChange={(e) => handleChange(field.key, e.target.value)}
                 placeholder={field.placeholder || ""}
               />
             ) : (
@@ -59,8 +67,8 @@ const DynamicForm = ({ formTitle, fields, onSubmit }) => {
                 type={field.type}
                 required={field.required}
                 className="p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={formData[field.label]}
-                onChange={(e) => handleChange(field.label, e.target.value)}
+                value={formData[String(field.key)]}
+                onChange={(e) => handleChange(field.key, e.target.value)}
                 placeholder={field.placeholder || ""}
               />
             )}
@@ -85,11 +93,3 @@ const DynamicForm = ({ formTitle, fields, onSubmit }) => {
 };
 
 export default DynamicForm;
-
-// Example Usage:
-// const artistsFields = [
-//   { label: 'Name', type: 'text', required: true, placeholder: 'Enter artist name' },
-//   { label: 'Age', type: 'number', required: false, placeholder: 'Enter artist age' },
-//   { label: 'Genre', type: 'text', required: true, placeholder: 'Enter artist genre' },
-// ];
-// <DynamicForm formTitle="Artists" fields={artistsFields} onSubmit={handleSubmit} />

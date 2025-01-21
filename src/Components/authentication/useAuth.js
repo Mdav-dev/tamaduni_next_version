@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
-import axios from "axios";
-import { base_url, user_url } from "@/hooks/urls";
 import { useRouter } from "next/navigation";
+import { base_url, user_url } from "@/hooks/urls";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -10,21 +9,19 @@ const useAuth = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  // Log out function with memoization
+  // Log out function
   const logout = useCallback(() => {
     Cookies.remove("authToken");
-    setUser(null); 
+    setUser(null);
     router.push("/auth/login");
   }, [router]);
 
-  // Verify token function
-  const verifyToken = useCallback(async (token) => {
-    try {
-      const response = await axios.get(`${base_url}user/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setUser(response.data);
-    } catch (err) {
+  // Function to check if token exists
+  const checkToken = useCallback(() => {
+    const token = Cookies.get("authToken");
+    if (token) {
+      setUser({ token });  // Set user state if token exists
+    } else {
       logout();
     }
   }, [logout]);
@@ -35,30 +32,34 @@ const useAuth = () => {
     setError(null);
 
     try {
-      const response = await axios.post(`${base_url}${user_url}/login`, {
-        email,
-        password,
+      const response = await fetch(`${base_url}${user_url}login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       });
 
-      const { token } = response.data;
-      Cookies.set("authToken", token, { secure: true, sameSite: "Strict" });
+      if (!response.ok) {
+        throw new Error("Invalid login credentials");
+      }
 
-      await verifyToken(token);
+      const data = await response.json();
+      Cookies.set("authToken", data.token, { secure: true, sameSite: "Strict" });
+
+      setUser({ token: data.token });
       router.push("/");
     } catch (error) {
-      setError(error.response?.data?.message || "Invalid login credentials");
+      setError(error.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
 
-  // Check for existing token when component mounts
+  // Check for token when component mounts
   useEffect(() => {
-    const token = Cookies.get("authToken");
-    if (token) {
-      verifyToken(token);
-    }
-  }, [verifyToken]);
+    checkToken();
+  }, [checkToken]);
 
   return { user, login, logout, loading, error };
 };
