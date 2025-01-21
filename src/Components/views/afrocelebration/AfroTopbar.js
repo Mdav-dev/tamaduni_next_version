@@ -4,12 +4,13 @@ import { FaBars, FaSearch } from "react-icons/fa";
 import { afroCelebrationForms } from "@/Components/admins/forms/afroCelebrationForms";
 import axios from "axios";
 
-
 const AfroTopbar = ({ onSelectionChange }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
-   const [searchData, setSearchData] = useState([])
+  const [searchData, setSearchData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredResults, setFilteredResults] = useState([]);
 
   // Extract categories and subcategories
   const categories = Object.keys(afroCelebrationForms);
@@ -17,19 +18,18 @@ const AfroTopbar = ({ onSelectionChange }) => {
     ? Object.keys(afroCelebrationForms[selectedCategory])
     : [];
 
-    useEffect(() => {
-      const fetchSearchResults = async () => {
-        try {
-          const response = await axios.get(`${base_url}afrocelebration/search`);
-          setSearchData(response.data. searchData || []);
-          console.log("Search Results:", response.data);
-        } catch (error) {
-          console.error("Error fetching search results:", error);
-        }
-      };
-  
-      fetchSearchResults();
-    }, []);  
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      try {
+        const response = await axios.get(`${base_url}afrocelebration/search`);
+        setSearchData(response.data.searchData || []);
+        console.log("Search Results:", response.data);
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
+    };
+    fetchSearchResults();
+  }, []);
 
   useEffect(() => {
     if (selectedCategory && selectedSubCategory) {
@@ -37,9 +37,25 @@ const AfroTopbar = ({ onSelectionChange }) => {
     }
   }, [selectedCategory, selectedSubCategory, onSelectionChange]);
 
+  // Handle search input changes
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value.trim() === "") {
+      setFilteredResults([]);
+      return;
+    }
+
+    const filtered = searchData.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredResults(filtered);
+  };
+
   return (
     <div className="py-2 px-4 flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
-      <div className="flex w-full md:w-auto items-center bg-gray-100 rounded-full px-4 py-2">
+      <div className="flex w-full md:w-auto items-center bg-gray-100 rounded-full px-4 py-2 relative">
         <FaBars
           className="text-gray-600 mr-3 cursor-pointer md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -48,8 +64,26 @@ const AfroTopbar = ({ onSelectionChange }) => {
           type="text"
           placeholder="Search..."
           className="bg-transparent text-sm outline-none text-gray-600 placeholder-gray-500 w-full"
+          value={searchTerm}
+          onChange={handleSearchChange}
         />
         <FaSearch className="text-gray-600 ml-3" />
+        {filteredResults.length > 0 && (
+          <ul className="absolute top-12 left-0 w-full bg-white border border-gray-300 rounded-md shadow-md z-10">
+            {filteredResults.map((result, index) => (
+              <li
+                key={index}
+                className="p-2 hover:bg-gray-200 cursor-pointer"
+                onClick={() => {
+                  setSearchTerm(result);
+                  setFilteredResults([]);
+                }}
+              >
+                {result}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const images = [
@@ -15,11 +15,7 @@ const Gallery = () => {
   const handleNext = () => {
     setIsFading(true);
     setTimeout(() => {
-      if (currentIndex < images.length - 1) {
-        setCurrentIndex(currentIndex + 1);
-      } else {
-        setCurrentIndex(0);
-      }
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
       setIsFading(false);
     }, 300);
   };
@@ -27,21 +23,20 @@ const Gallery = () => {
   const handlePrev = () => {
     setIsFading(true);
     setTimeout(() => {
-      if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 1);
-      } else {
-        setCurrentIndex(images.length - 1);
-      }
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      );
       setIsFading(false);
     }, 300);
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full max-h-[80vh] overflow-hidden">
       <div
-        className={`w-full h-full relative transition-opacity duration-300 ${
+        className={`relative w-full h-full transition-opacity duration-300 ${
           isFading ? "opacity-0" : "opacity-100"
         }`}
+        style={{ maxHeight: "80vh" }}
       >
         <Image
           src={images[currentIndex]}
@@ -54,14 +49,14 @@ const Gallery = () => {
 
       <button
         onClick={handlePrev}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 hover:bg-gray-200 p-1 rounded-full transition duration-300"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
       >
         <FaAngleLeft className="text-gray-600" />
       </button>
 
       <button
         onClick={handleNext}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 hover:bg-gray-200 p-1 rounded-full transition duration-300"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300"
       >
         <FaAngleRight className="text-gray-600" />
       </button>
