@@ -1,44 +1,45 @@
 [
     {
         "id": 1,
-        "name": "John Doe",
+        "name": "Ngozi Okafor",
         "role": "CEO",
         "image": "https://images.unsplash.com/photo-1565884280295-98eb83e41c65?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies."
+        "description": "Ngozi is a passionate advocate for preserving African culture and heritage. As CEO, she leads efforts to promote African history through dynamic exhibitions and educational programs."
     },
     {
-        "id": 1,
-        "name": "John Doe",
-        "role": "CEO",
+        "id": 2,
+        "name": "Kwame Nkrumah",
+        "role": "Chief Curator",
         "image": "https://images.unsplash.com/photo-1512516756229-95a66d49c4e9?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies."
+        "description": "Kwame oversees the museum's collections and curates exhibitions that highlight the richness of African art, history, and traditions."
     },
     {
-        "id": 1,
-        "name": "John Doe",
-        "role": "CEO",
+        "id": 3,
+        "name": "Amina Mbeki",
+        "role": "Director of Education",
         "image": "https://images.unsplash.com/photo-1521511189395-b82252213754?q=80&w=1390&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies."
+        "description": "Amina is dedicated to developing educational programs that bring African cultural heritage to life for visitors of all ages. She works closely with schools and communities."
     },
     {
-        "id": 1,
-        "name": "John Doe",
-        "role": "CEO",
+        "id": 4,
+        "name": "Thabo Modise",
+        "role": "Operations Manager",
         "image": "https://images.unsplash.com/photo-1531901599143-df5010ab9438?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies."
+        "description": "Thabo ensures the smooth operation of the museum, from coordinating exhibitions to managing logistics. His goal is to create an accessible and enjoyable visitor experience."
     },
     {
-        "id": 1,
-        "name": "John Doe",
-        "role": "CEO",
+        "id": 5,
+        "name": "Zuri Nia",
+        "role": "Marketing Director",
         "image": "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies."
+        "description": "Zuri leads the marketing team and crafts campaigns to engage the public and raise awareness about the museum’s cultural initiatives and exhibitions."
     },
     {
-        "id": 1,
-        "name": "John Doe",
-        "role": "CEO",
+        "id": 6,
+        "name": "Sibongile Khumalo",
+        "role": "Chief Financial Officer",
         "image": "https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc. Nullam nec purus nec nunc tincidunt ultricies. Nullam nec purus nec nunc tincidunt ultricies."
+        "description": "Sibongile manages the museum’s finances, ensuring that resources are allocated efficiently to support programs and community outreach efforts."
     }
 ]
+  
