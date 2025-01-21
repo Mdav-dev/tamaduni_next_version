@@ -6,7 +6,7 @@ import { base_url } from "@/hooks/urls";
 import axios from "axios";
 import { useState } from "react";
 
-const CivilizationContent = () => {
+const CivilizationContent = (selectedValues) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -42,7 +42,7 @@ const CivilizationContent = () => {
         <LeftContainer />
       </section>
       <section className=" w-full md:w-3/4 m-0" style={{ margin: 0 }}>
-        <RightContainer />
+        <RightContainer selectedValues = {selectedValues}/>
       </section>
     </div>
   );

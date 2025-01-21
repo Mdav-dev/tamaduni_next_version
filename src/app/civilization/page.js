@@ -1,7 +1,7 @@
 "use client";
 import CivilizationTopbar from "@/Components/views/civilization/CivilizationTopbar";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, {useState}from "react";
 
 //import CivilizationContent and dissable ssr
 const CivilizationContent = dynamic(
@@ -9,13 +9,20 @@ const CivilizationContent = dynamic(
   { ssr: false }
 );
 
-function page() {
+function Page() {
+  const [selectedValues, setSelectedValues] = useState({ category: "", subCategory: "" });
+
+  // Function to receive selected values from AfroTopbar
+  const handleSelectionChange = (category, subCategory) => {
+    setSelectedValues({ category, subCategory });
+  };
+
   return (
     <div>
-      <CivilizationTopbar />
-      <CivilizationContent />
+      <CivilizationTopbar onSelectionChange={handleSelectionChange}/>
+      <CivilizationContent selectedValues={selectedValues}/>
     </div>
   );
 }
 
-export default page;
+export default Page;

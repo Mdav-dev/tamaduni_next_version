@@ -77,6 +77,8 @@ const List = () => {
               key={index}
               src={img}
               alt={selectedPerson.name}
+             width={396}
+             height={238}
               className="w-full  object-cover rounded-lg mb-4"
             />
           ))}

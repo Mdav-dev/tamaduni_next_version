@@ -12,7 +12,7 @@ const List = dynamic(() => import("./list/List"), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery"), { ssr: false });
 const Map = dynamic(() => import("./Map"), { ssr: false });
 
-const ContentSlider = () => {
+const ContentSlider = ({selectedValues}) => {
   const [selectedTab, setSelectedTab] = useState("gallery");
 
   const [isLoading, setIsLoading] = useState(true);
@@ -36,13 +36,36 @@ const ContentSlider = () => {
     fetchData();
   }, []);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+   useEffect(() => {
+      const fetchData = async () => {
+        if (!selectedValues?.subCategory) return;
+        setIsLoading(true);
+        setIsError(false);
+        try {
+          const response = await axios.get(
+            `${base_url}culturalMapping/${selectedValues.subCategory}}`
+          );
+          setSubCategoryData(response.data.subCategoryData || []);
+          console.log("Fetched Data:", response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setIsError(true);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchData();
+    }, [selectedValues]);
+    console.log(selectedValues.subCategory)
+  
 
-  if (isError) {
-    return <p>Error loading data!</p>;
-  }
+  // if (isLoading) {
+  //   return <p>Loading...</p>;
+  // }
+
+  // if (isError) {
+  //   return <p>Error loading data!</p>;
+  // }
 
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
@@ -107,8 +130,10 @@ const ContentSlider = () => {
             />
           </div>
           <div className=" mt-2">
-            <h2 className="text-lg font-bold">Heritage Places</h2>
-            <p className="text-sm text-gray-600 italic">Museums</p>
+          <h2 className="text-lg font-bold">{selectedValues?.category || "Heritage Places"}</h2>
+            <p className="text-sm text-gray-600 italic">{selectedValues?.subCategory || "Museums"}</p>
+            {/* <h2 className="text-lg font-bold">Heritage Places</h2>
+            <p className="text-sm text-gray-600 italic">Museums</p> */}
           </div>
           <span className="hidden md:block text-xs text-gray-600">1/3</span>
         </div>

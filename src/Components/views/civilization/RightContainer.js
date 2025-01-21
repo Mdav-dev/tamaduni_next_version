@@ -5,7 +5,7 @@ import MapComponent from "../culturalMapping/Map";
 import Map from "./map/Map";
 import Gallery from "./Gallery";
 
-const RightContainer = () => {
+const RightContainer = (selectedValues) => {
   const [selectedTab, setSelectedTab] = useState("gallery");
   const handleTabClick = (tab) => {
     setSelectedTab(tab);

@@ -46,8 +46,8 @@ const Gallery = () => {
         <Image
           src={images[currentIndex]}
           alt={`Slide ${currentIndex}`}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           className="rounded-lg"
         />
       </div>

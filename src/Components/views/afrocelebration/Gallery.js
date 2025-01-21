@@ -11,7 +11,7 @@ const Gallery = () => {
         // height={895}
         alt="Main Content"
         layout="fill"
-        objectFit="cover" // or "contain" depending on your desired behavior
+        style={{ objectFit: "cover" }} // or "contain" depending on your desired behavior
         className="rounded-lg"
       />
       {/* Navigation Arrows */}
